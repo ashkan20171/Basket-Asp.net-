@@ -1,0 +1,33 @@
+﻿@model IEnumerable<ShowBasketViewModel>
+<div class="card border-0 ">
+    @if (Model.Any())
+    {
+        foreach (var item in Model)
+        {
+            <div class="row mb-2">
+                <div class="col-md-4">
+                    <img class="card-img-top" src="/Image/@item.ImageName" class="thumbnail" style="max-width: 100%" alt="Card image cap">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h6 class="card-title text-secondary">نام محصول:@item.Title </h6>
+                    </div>
+                </div>
+                <ul class="list-group ">
+                    <p class="font-weight-bolder text-center "> تعداد:<span class="badge badge-primary p-2 text-white">@item.Count</span></p>
+                </ul>
+            </div>
+
+
+        }
+    }
+    else
+    {
+        <div class="card-footer">
+            سبد خرید شما خالی میباشد
+        </div>
+    }
+</div>
+<div class="">
+    <a class="btn btn-success btn-block" asp-controller="Basket" asp-action="ShowOrder"> نمایش فاکتور</a>
+</div>

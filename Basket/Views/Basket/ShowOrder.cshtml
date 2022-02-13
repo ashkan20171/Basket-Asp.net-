@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Basket.Models.ViewModel.ShowListOrderViewModel>
+@{
+    ViewData["Title"] = "نمایش فاکتور";
+    int row = 1;
+}
+<h1>نمایش فاکتور</h1>
+<hr />
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>تصویر</th>
+        <th>عنوان</th>
+        <th>تعداد</th>
+        <th>قیمت</th>
+        <th>مبلغ کل</th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@row</td>
+            <td>
+                <img style="max-width: 150px" class="thumbnail" src="/Image/@item.ImageName" />
+            </td>
+            <td>@item.Title</td>
+            <td>@item.Count</td>
+            <td>@item.Price</td>
+            <td>@item.Sum</td>
+            <td>
+                <a class="btn  btn-outline-danger" asp-controller="Basket" asp-action="Delete" asp-route-id="@item.OrderDetailsId">حذف </a>
+                <a href="/Basket/Command/@item.OrderDetailsId?command=up" class="btn btn-sm btn-outline-info">افزایش</a>
+                <a href="/Basket/Command/@item.OrderDetailsId?command=down" class="btn btn-sm btn-outline-warning">کاهش</a>
+            </td>
+        </tr>
+        row += 1;
+    }
+    <tr>
+        <td colspan="5" class="text-left">جمع کل : </td>
+        <td colspan="2">
+            @Model.Sum(s => s.Sum).ToString("#,0")
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4" class="text-left"></td>
+        <td colspan="3">
+            <a class="btn btn-primary btn-block">تایید و پرداخت نهایی</a>
+        </td>
+    </tr>
+</table>

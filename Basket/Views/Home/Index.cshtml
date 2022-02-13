@@ -1,0 +1,29 @@
+﻿@using System.Security.Claims
+@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "Home Page";
+}
+@*<h2>@User.Identity.Name</h2>
+    <h4>@User.FindFirst(ClaimTypes.NameIdentifier)</h4>*@
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-12 col-lg-4">
+            <div class="box-shadow">
+                <div class="img-layer">
+                    <img class="img-thumbnail" src="/Image/@item.ImageName" style="max-width: 74%">
+                </div>
+                <div class="bg-warning">
+                    <h4><a class="text-center ml-4">@item.Title</a></h4>
+                    <p>
+                        @item.Description
+                    </p>
+                    <div>
+                        <a><i class="zmdi zmdi-account"></i>@item.Price </a>
+                    </div>
+                    <a asp-controller="Basket" asp-action="AddToCart" asp-route-id="@item.ProductId" class="btn btn-success text-center"> افزودن به سبد خرید</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
